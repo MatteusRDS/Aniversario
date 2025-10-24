@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolo</title>
+    <link rel="stylesheet" href="bolo.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body> <audio autoplay loop>
+        <source src="Music/Parabéns Angolano (cortado).mp3" type="audio/mpeg">
+    </audio>
+    <div id="birthday-cake">
+        <div class="cake">
+            <div class="middle"></div>
+            <div class="chocs"></div>
+            <div class="top"></div>
+        </div>
+        <div class="candles">
+            <div class="flame"></div>
+            <div class="flame2"></div>
+            <div class="flame3"></div>
+            <div class="text">PARABENS!!</div>
+            <div class="shadows"></div>
+        </div>
+        <p class="text2">Apague As Velas e Aguarde Seu Presente!</p>
+
+        <div class="chuva-estrelas"></div>
+
+        <!-- 🎁 Caixa de presente animada -->
+        <div id="caixa-presente">
+            <div id="presente">
+                <div class="tampa">
+                    <div class="laco">
+                        <div class="laço-horizontal"></div>
+                        <div class="laço-vertical"></div>
+                        <div class="nó"></div>
+                    </div>
+                </div>
+                <div class="caixa"></div>
+                <img class="surpresa" src="Figurinhas/S.webp" alt="Surpresa">
+            </div>
+        </div>
+
+
+
+
+
+
+        <script>
+            $(".candles").click(function () {
+                // Apaga as chamas
+                $(".flame").animate({ "opacity": 0 }, "fast");
+                $(".flame2").animate({ "opacity": 0 }, "fast");
+                $(".flame3").animate({ "opacity": 0 }, "fast");
+                $(".text").animate({ "top": -90, "opacity": 1 }, "fast");
+
+                // Depois de 1 segundo, mostra a caixa 🎁
+                setTimeout(() => {
+                    mostrarCaixaPresente();
+                }, 3000);
+            });
+
+
+
+
+
+
+            function mostrarCaixaPresente() {
+                const caixa = document.getElementById('caixa-presente');
+
+                const tampa = document.querySelector('.tampa');
+                const surpresa = document.querySelector('.surpresa');
+
+                caixa.style.display = 'block';
+
+                setTimeout(() => {
+                    tampa.style.transform = 'rotateX(120deg)';
+                    surpresa.style.top = '-100px';
+                    surpresa.style.opacity = 1;
+
+                    iniciarConfetes();
+                },
+
+                    2000);
+            }
+
+
+            function criarConfete() {
+                const confete = document.createElement('div');
+                confete.classList.add('confete');
+
+                // Posicionar horizontalmente aleatório
+                confete.style.left = Math.random() * window.innerWidth + 'px';
+
+                // Cor aleatória em HSL para cores vivas variadas
+                confete.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+                // Duracão da animação também aleatória para parecer mais natural
+                confete.style.animationDuration = (3 + Math.random() * 2) + 's';
+
+                document.body.appendChild(confete);
+
+                // Remover o confete depois que a animação terminar para limpar o DOM
+                setTimeout(() => {
+                    confete.remove();
+                }, 5000); // 5 segundos é suficiente (de acordo com o animationDuration)
+            }
+            function iniciarConfetes() {
+                const intervalo = setInterval(criarConfete, 200);
+
+                // Para criar confetes por 10 segundos e parar
+                setTimeout(() => {
+                    clearInterval(intervalo);
+                }, 10000);
+            }
+
+
+
+
+
+
+
+
+
+            const estrelas = ["⭐", "🌟", "✨"];
+            const container = document.querySelector('.chuva-estrelas');
+
+            for (let i = 0; i < 40; i++) {
+                const estrela = document.createElement('div');
+                estrela.classList.add('estrela');
+                estrela.textContent = estrelas[Math.floor(Math.random() * estrelas.length)];
+                estrela.style.left = Math.random() * 100 + 'vw';
+                estrela.style.animationDuration = (4 + Math.random() * 4) + 's';
+                estrela.style.animationDelay = (Math.random() * 4) + 's';
+                estrela.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(estrela);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+</body>
+
+</html>
